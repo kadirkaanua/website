@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Mail, Menu, X, Terminal, Cloud, Database, Code, Server } from 'lucide-react';
+import { Github, Linkedin, Mail, Menu, X, Terminal, Cloud, Code, Server } from 'lucide-react';
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
