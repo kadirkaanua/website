@@ -109,7 +109,7 @@ const Portfolio = () => {
         <div className="max-w-6xl mx-auto px-4 text-center">
           <div className="mb-8 flex justify-center">
             <img 
-              src="/src/assets/profile.jpg" 
+              src="/assets/profile.jpg" 
               alt="Abdülkadir Kemal Kan" 
               className="rounded-full w-48 h-48 object-cover border-4 border-white shadow-lg"
             />
