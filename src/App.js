@@ -193,7 +193,7 @@ const Portfolio = () => {
             <a href="https://github.com/kadirkaanua" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
               <Github size={24} />
             </a>
-            <a href="https://linkedin.com/in/abdulkadir-kemal-kan" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
+            <a href="https://www.linkedin.com/in/kadir-kan-4a744688/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
               <Linkedin size={24} />
             </a>
             <a href="mailto:kadir.kaan711@gmail.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
