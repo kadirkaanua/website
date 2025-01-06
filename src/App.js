@@ -13,7 +13,7 @@ const Portfolio = () => {
     ]},
     { category: 'IaC & Automation', skills: [
       { name: 'Terraform', level: '90%' },
-      { name: 'Ansible', level: '90%' },
+      { name: 'Ansible', level: '95%' },
       { name: 'Bash Script', level: '85%' },
       { name: 'Python', level: '80%' }
     ]},
