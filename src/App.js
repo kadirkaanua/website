@@ -76,13 +76,11 @@ const Portfolio = () => {
               <Cloud className="h-6 w-6" />
               <span className="text-xl font-bold">kadirkan.cloud</span>
             </div>
-            
             <div className="md:hidden">
               <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 {isMenuOpen ? <X /> : <Menu />}
               </button>
             </div>
-
             <div className="hidden md:flex space-x-8">
               <a href="#about" className="hover:text-blue-400">Hakkımda</a>
               <a href="#skills" className="hover:text-blue-400">Yetenekler</a>
@@ -91,7 +89,6 @@ const Portfolio = () => {
             </div>
           </div>
         </div>
-
         {isMenuOpen && (
           <div className="md:hidden bg-gray-800">
             <div className="px-2 pt-2 pb-3 space-y-1">
@@ -204,18 +201,19 @@ const Portfolio = () => {
       </section>
 
       {/* Footer */}
-<footer className="bg-gray-900 text-white py-8">
-  <div className="max-w-6xl mx-auto px-4 text-center">
-    <p>&copy; 2024 kadirkan.cloud - Tüm hakları saklıdır.</p>
-    <div className="mt-4">
-      <a href="/koridor" className="text-blue-400 hover:underline">
-        Koridor AI
-      </a>
-    </div>
-  </div>
-</footer>
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <p>&copy; 2024 kadirkan.cloud - Tüm hakları saklıdır.</p>
+          <div className="mt-4">
+            <a href="/koridor" className="text-blue-400 hover:underline">
+              Koridor AI
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
 
 export default Portfolio;
+
