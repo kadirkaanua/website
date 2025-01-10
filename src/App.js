@@ -204,11 +204,16 @@ const Portfolio = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <p>&copy; 2024 kadirkan.cloud - Tüm hakları saklıdır.</p>
-        </div>
-      </footer>
+<footer className="bg-gray-900 text-white py-8">
+  <div className="max-w-6xl mx-auto px-4 text-center">
+    <p>&copy; 2024 kadirkan.cloud - Tüm hakları saklıdır.</p>
+    <div className="mt-4">
+      <a href="/koridor" className="text-blue-400 hover:underline">
+        Koridor AI
+      </a>
+    </div>
+  </div>
+</footer>
     </div>
   );
 };
