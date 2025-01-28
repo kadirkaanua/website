@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, Menu, X, Terminal, Cloud, Code, Server } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Menu, X, Terminal, Cloud, Code, Server } from 'lucide-react';
 
 // Countdown Timer Component
 const CountdownTimer = ({ targetDate }) => {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-
-  function calculateTimeLeft() {
+  const calculateTimeLeft = useCallback(() => {
     const difference = targetDate - new Date();
-    let timeLeft = {};
-
     if (difference > 0) {
-      timeLeft = {
+      return {
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / (1000 * 60)) % 60),
         seconds: Math.floor((difference / 1000) % 60),
       };
     }
+    return { hours: 0, minutes: 0, seconds: 0 };
+  }, [targetDate]);
 
-    return timeLeft;
-  }
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -26,13 +23,13 @@ const CountdownTimer = ({ targetDate }) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [calculateTimeLeft]);
 
   return (
     <div className="bg-blue-900 text-white text-center py-4">
       <h2 className="text-2xl font-bold">Geri Sayım</h2>
       <p className="text-lg">
-        {timeLeft.hours || 0} Saat, {timeLeft.minutes || 0} Dakika, {timeLeft.seconds || 0} Saniye
+        {timeLeft.hours} Saat, {timeLeft.minutes} Dakika, {timeLeft.seconds} Saniye
       </p>
     </div>
   );
@@ -104,7 +101,37 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* Remaining sections */}
+      {/* About Section */}
+      <section id="about" className="py-20">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-8 text-center">Hakkımda</h2>
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <p className="text-gray-600 leading-relaxed">
+              Yaklaşık 4 yıldır, Mühendislik eğitimi ve teknolojik ilgilerim doğrultusunda, ilerleyen teknolojiler ve sürekli olarak gelişen DevOps kültüründe, sürekli olarak öğrenmeyi ve gelişmeyi hedefleyen birisi olarak çalışmaktayım. Cloud platformları, konteynerizasyon, CI/CD ve IaC gibi modern DevOps pratiklerinde deneyim sahibiyim. Özellikle Kubernetes, Docker, AWS, Terraform ve Ansible konularında uzmanlık geliştirdim.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-8 text-center">Teknik Yetenekler</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <h3 className="text-xl font-bold mb-4">Cloud & Infrastructure</h3>
+              <p>AWS, Kubernetes, Docker</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <p>&copy; 2024 kadirkan.cloud - Tüm hakları saklıdır.</p>
+        </div>
+      </footer>
     </div>
   );
 };
