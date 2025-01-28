@@ -1,73 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, Menu, X, Terminal, Cloud, Code, Server } from 'lucide-react';
 
-const Portfolio = () => {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+// Countdown Timer Component
+const CountdownTimer = ({ targetDate }) => {
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-  const devopsSkills = [
-    { category: 'Cloud & Infrastructure', skills: [
-      { name: 'AWS', level: '85%' },
-      { name: 'KVM/QEMU', level: '90%' },
-      { name: 'Kubernetes', level: '85%' },
-      { name: 'Docker', level: '90%' }
-    ]},
-    { category: 'IaC & Automation', skills: [
-      { name: 'Terraform', level: '90%' },
-      { name: 'Ansible', level: '95%' },
-      { name: 'Bash Script', level: '85%' },
-      { name: 'Python', level: '80%' }
-    ]},
-    { category: 'CI/CD & Version Control', skills: [
-      { name: 'Jenkins', level: '85%' },
-      { name: 'Bitbucket', level: '90%' },
-      { name: 'Git', level: '90%' }
-    ]},
-    { category: 'Monitoring & Database', skills: [
-      { name: 'Zabbix', level: '85%' },
-      { name: 'Oracle', level: '80%' },
-      { name: 'PostgreSQL', level: '85%' },
-      { name: 'AppDynamics', level: '80%' }
-    ]}
-  ];
+  function calculateTimeLeft() {
+    const difference = targetDate - new Date();
+    let timeLeft = {};
 
-  const experiences = [
-    {
-      title: 'DevOps Engineer',
-      company: 'Vitelco (Vodafone)',
-      period: '2024 - Present',
-      responsibilities: [
-        'Bitbucket ve Ansible ile çoklu sunucular üzerinde otomasyon kurulumu',
-        'Python Flask ile Oracle database sorgularını dashboard haline getirme',
-        'Crontab ve Bash scriptler ile otomatik mail alarmları oluşturma',
-        'AppDynamics update ve Kafka konfigürasyonu'
-      ]
-    },
-    {
-      title: 'DevOps Engineer',
-      company: 'Creentech Teknoloji Danışmanlık',
-      period: '2023 - 2024',
-      responsibilities: [
-        'Zabbix ve Grafana ile sunucu izleme projelerinin yönetimi',
-        'Terraform ve Ansible ile Nutanix üzerinde Kubernetes cluster kurulumu',
-        'Elasticsearch ve Kibana yapılandırması',
-        'Docker-compose ile MinIO kurulumu ve yönetimi'
-      ]
-    },
-    {
-      title: 'Junior DevOps Engineer',
-      company: 'Veriyol A.Ş.',
-      period: '2021 - 2023',
-      responsibilities: [
-        'KVM/QEMU teknolojileri ile sanal makineler oluşturma',
-        'AWS ve Kubernetes servislerinde sistem yönetimi',
-        'Terraform ve Ansible ile altyapı yönetimi',
-        'Blockchain teknolojileri entegrasyonu'
-      ]
+    if (difference > 0) {
+      timeLeft = {
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / (1000 * 60)) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
     }
-  ];
+
+    return timeLeft;
+  }
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="bg-blue-900 text-white text-center py-4">
+      <h2 className="text-2xl font-bold">Geri Sayım</h2>
+      <p className="text-lg">
+        {timeLeft.hours || 0} Saat, {timeLeft.minutes || 0} Dakika, {timeLeft.seconds || 0} Saniye
+      </p>
+    </div>
+  );
+};
+
+const Portfolio = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Target date 36 hours from now
+  const targetDate = new Date();
+  targetDate.setHours(targetDate.getHours() + 36);
 
   return (
     <div className="min-h-screen bg-gray-100">
+      {/* Countdown Timer */}
+      <CountdownTimer targetDate={targetDate} />
+
       {/* Navigation */}
       <nav className="bg-gray-900 text-white shadow-lg">
         <div className="max-w-6xl mx-auto px-4">
@@ -122,95 +104,7 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* About Section */}
-      <section id="about" className="py-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 text-center">Hakkımda</h2>
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <p className="text-gray-600 leading-relaxed">
-              Yaklaşık 4 yıldır, Mühendislik eğitimi ve teknolojik ilgilerim doğrultusunda, ilerleyen teknolojiler ve sürekli olarak gelişen DevOps kültüründe, sürekli olarak öğrenmeyi ve gelişmeyi hedefleyen birisi olarak çalışmaktayım. Cloud platformları, konteynerizasyon, CI/CD ve IaC gibi modern DevOps pratiklerinde deneyim sahibiyim. Özellikle Kubernetes, Docker, AWS, Terraform ve Ansible konularında uzmanlık geliştirdim.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 text-center">Teknik Yetenekler</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {devopsSkills.map((category, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-6">
-                <h3 className="text-xl font-bold mb-4">{category.category}</h3>
-                {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex} className="mb-4">
-                    <div className="flex justify-between mb-2">
-                      <span className="font-semibold">{skill.name}</span>
-                      <span>{skill.level}</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-blue-600 rounded-full h-2" 
-                        style={{width: skill.level}}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Experience Section */}
-      <section id="experience" className="py-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 text-center">İş Deneyimi</h2>
-          <div className="space-y-6">
-            {experiences.map((exp, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-6">
-                <h3 className="text-xl font-bold mb-2">{exp.title}</h3>
-                <p className="text-gray-600 mb-2">{exp.company} | {exp.period}</p>
-                <ul className="list-disc list-inside text-gray-600">
-                  {exp.responsibilities.map((resp, respIndex) => (
-                    <li key={respIndex} className="mb-1">{resp}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 text-center">İletişim</h2>
-          <div className="flex justify-center space-x-6">
-            <a href="https://github.com/kadirkaanua" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
-              <Github size={24} />
-            </a>
-            <a href="https://www.linkedin.com/in/kadir-kan-4a744688/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
-              <Linkedin size={24} />
-            </a>
-            <a href="mailto:kadir.kaan711@gmail.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
-              <Mail size={24} />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <p>&copy; 2024 kadirkan.cloud - Tüm hakları saklıdır.</p>
-          <div className="mt-4">
-            <a href="/koridor" className="text-blue-400 hover:underline">
-              Koridor AI
-            </a>
-          </div>
-        </div>
-      </footer>
+      {/* Remaining sections */}
     </div>
   );
 };
